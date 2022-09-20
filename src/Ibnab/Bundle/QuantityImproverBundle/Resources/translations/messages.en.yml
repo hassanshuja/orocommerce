@@ -1,0 +1,40 @@
+ibnab:
+    quantity_improver:
+        product:
+            error:
+                increment_quantity_wrong: 'Available to order by Increment of %increment%'
+        fields:
+            product:
+                increment_quantity_to_order:
+                    label: Order Product By Increment Quantity
+                enable_increment_quantity_to_order:
+                    label: Enable Order Product By Increment Quantity
+                available_quantity_to_order:
+                    label: 'Available to order by Increment of '
+        system_configuration:
+            groups:
+                title: Ibnab
+                settings:
+                    title: Quantity
+                view:
+                    title: Quantity Select Box
+            fields:
+                enable_message_increment:
+                    label: Enable message of buy by increment of x in product list & veiw page
+                increment_quantity_to_order:
+                    label: Order Product By Increment Quantity
+                no:
+                    label: No
+                yes:
+                    label: Yes
+                min_quantity:
+                    label: Default Min Quantity
+                max_quantity:
+                    label: Default Max Quantity    
+                enable:
+                    label: Enable
+                increment:
+                    label: Quantity Incrementer
+                enable_select:
+                    label: Enable Quantity as Select Box 
+

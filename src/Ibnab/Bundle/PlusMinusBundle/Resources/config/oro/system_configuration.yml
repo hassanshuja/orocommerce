@@ -1,0 +1,33 @@
+system_configuration:
+    groups:
+        ibnab_config:
+            title: ibnab.plus_minus.system_configuration.groups.title
+        ibnab_plus_minus_setting:
+            title: ibnab.plus_minus.system_configuration.groups.settings.title
+            icon:  'fa-file'
+        ibnab_plus_minus_view:
+            title: ibnab.plus_minus.system_configuration.groups.view.title
+    fields:
+        ibnab_plus_minus.enable:
+            data_type: integer
+            type: 'Symfony\Component\Form\Extension\Core\Type\ChoiceType'
+            priority: 5
+            options:
+                label: ibnab.plus_minus.system_configuration.fields.enable.label
+                required: false
+                choices:
+                    ibnab.plus_minus.system_configuration.fields.no.label: 0 
+                    ibnab.plus_minus.system_configuration.fields.yes.label: 1
+    tree:
+        system_configuration:
+            platform:
+                children:
+                    ibnab_config:
+                        children:
+                            ibnab_plus_minus_setting:
+                                priority: 502
+                                children:
+                                    ibnab_plus_minus_view:
+                                        priority: 703
+                                        children:
+                                            - ibnab_plus_minus.enable

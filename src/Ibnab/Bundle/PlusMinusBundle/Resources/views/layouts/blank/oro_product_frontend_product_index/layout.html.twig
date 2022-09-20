@@ -1,0 +1,16 @@
+{% block _minux_plus_qty_form_list_widget %}
+    {% set attr = layout_attr_defaults(attr, {
+        'data-page-component-module': 'ibnabplusminus/js/plus-minus',
+    }) %}
+    <div {{ block('block_attributes') }}>
+        {{ block_widget(block) }}
+    </div>
+{% endblock %}
+{% block _product_view_minux_plus_qty_form_list_widget %}
+    {% set attr = layout_attr_defaults(attr, {
+        'data-page-component-module': 'ibnabplusminus/js/plus-minus',
+    }) %}
+    <div {{ block('block_attributes') }}>
+        {{ block_widget(block) }}
+    </div>
+{% endblock %}

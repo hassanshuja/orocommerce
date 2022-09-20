@@ -1,0 +1,5 @@
+layout:
+    actions:
+        - '@setBlockTheme':
+            themes: 'oro_product_line_item_form.html.twig'
+    conditions: 'context["enable_plus_minus"]'

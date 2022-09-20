@@ -1,0 +1,9 @@
+layout:
+    actions:
+        - '@setBlockTheme':
+            themes: '@IbnabPlusMinus/layouts/default/oro_shopping_list_frontend_view/view.html.twig'
+        - '@add':
+            id: minux_plus_qty_form_cart
+            parentId: shopping_list_line_items_list_row
+            blockType: block
+    conditions: 'context["enable_plus_minus"]'

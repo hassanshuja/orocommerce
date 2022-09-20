@@ -1,0 +1,5 @@
+layout:
+    actions:
+        - '@setBlockTheme':
+            themes: '@IbnabQuantityImprover/layouts/blank/oro_product_frontend_product_view/line_item_form.html.twig'
+    conditions: 'context["enable_quantity_improver"]'

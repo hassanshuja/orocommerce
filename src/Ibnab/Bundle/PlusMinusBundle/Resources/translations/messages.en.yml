@@ -1,0 +1,16 @@
+ibnab:
+    plus_minus:
+        system_configuration:
+            groups:
+                title: Ibnab
+                settings:
+                    title: Quantity
+                view:
+                    title: Quantity Improver
+            fields:
+                no:
+                    label: No
+                yes:
+                    label: Yes
+                enable:
+                    label: Enable Plus Minus

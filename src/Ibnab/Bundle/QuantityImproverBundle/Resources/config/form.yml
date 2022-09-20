@@ -1,0 +1,35 @@
+services:               
+    ibnab_quantity_improver.form.extension.frontned_quantity_type_extension:
+        class: Ibnab\Bundle\QuantityImproverBundle\Form\Extension\FrontendFrontendLineItemExtension
+        arguments:
+            - '@translator'
+            - '@request_stack'
+        calls:
+            - [setFrontendHelper, ['@oro_frontend.request.frontend_helper']]
+            - [setConfigurationProvider, ['@ibnab_quantity_improver.provider.configuration']]
+            - [setQuantityToOrderValidatorService, ['@ibnab_quantity_improver.validator.quantity_to_order_validator']]
+
+        tags:
+            - { name: form.type_extension, extended_type: 'Oro\Bundle\ProductBundle\Form\Type\FrontendLineItemType' }
+    ibnab_quantity_improver.form.type.quantity_type:
+        class: 'Ibnab\Bundle\QuantityImproverBundle\Form\Type\QuantityType'
+        arguments:
+            - '@oro_locale.formatter.number'
+            - 'Oro\Bundle\ProductBundle\Entity\Product'
+        tags:
+            - { name: form.type, alias: oro_quantity_select }
+            
+    ibnab_quantity_improver.type.extension.category_increment_quantity_to_order_type_extension:
+        class: Ibnab\Bundle\QuantityImproverBundle\Form\Extension\CategoryQuantityToOrderFormExtension
+        tags:
+            - { name: form.type_extension, extended_type: Oro\Bundle\CatalogBundle\Form\Type\CategoryType }
+    
+    ibnab_quantity_improver.type.extension.product_increment_quantity_to_order_type_extension:
+        class: Ibnab\Bundle\QuantityImproverBundle\Form\Extension\ProductQuantityToOrderFormExtension
+        tags:
+            - { name: form.type_extension, extended_type: Oro\Bundle\ProductBundle\Form\Type\ProductType }
+            
+    ibnab_quantity_improver.type.extension.category_quantity_to_order_type_extension:
+        class: Ibnab\Bundle\QuantityImproverBundle\Form\Extension\CategoryQuantityToOrderFormExtension
+        tags:
+            - { name: form.type_extension, extended_type: Oro\Bundle\CatalogBundle\Form\Type\CategoryType }

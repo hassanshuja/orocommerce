@@ -1,0 +1,12 @@
+layout:
+    actions:
+        - '@setBlockTheme':
+            themes: '@IbnabQuantityImprover/layouts/default/oro_shopping_list_frontend_view/view.html.twig'
+
+        - '@setOption':
+            id:  shopping_list_line_items_list_quantity_form
+            optionName: vars
+            optionValue:
+                minimumQuantityToOrderConfig: '=data["ibnab_quantity_improver_data"].getMinimumQuantityToOrder()'
+                maximumQuantityToOrderConfig: '=data["ibnab_quantity_improver_data"].getMaximumQuantityToOrder()'
+    conditions: 'context["enable_quantity_improver"]'

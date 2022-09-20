@@ -1,0 +1,111 @@
+.input-group-btn{
+    &.qty-minus{
+        position: absolute;
+        .btn-number{
+            border-radius: 5px 0 0 5px;
+            line-height: 1.3;
+            background: #fff;
+            //box-shadow: 0 0 2px #626365;
+            border: 1px solid #ebebeb;
+            color:#000;
+            //border-right: 0;
+            /*&:disabled {
+                background: #dddddd;
+            }*/
+            &:hover {
+                background: #000;
+                color:#fff;
+            }
+        }
+    }
+    &.qty-plus{
+        position: relative;
+        margin-left: -32px;
+        .btn-number{
+            border-radius: 0px 5px 5px 0px;
+            line-height: 1.3;
+            background: #fff;
+            //box-shadow: 0 0 2px #626365;
+            border: 1px solid #ebebeb;
+            //border-left: 0;
+            color:#000;
+           /* &:disabled {
+                background: #dddddd;
+            }*/
+            &:hover {
+                background: #000;
+                color:#fff;
+            }
+        }
+    }
+}
+.product-item__qty .line_item_form_fields {
+    width: calc(40% - 5px);
+    display: flex;
+}
+.product-item__qty .qty-plus-minus {
+    width: calc(60% - 5px);
+    display: flex;
+}
+.product-view-quantity__value{
+    .input-group-btn{
+       &.qty-minus{
+        position: relative;
+        //margin-top: 40px;
+        float: left;
+       }
+       &.qty-plus{
+        position: relative;
+        margin-top: -40px;
+        float: right;
+       }
+    }
+    width: 60%;
+}
+.shopping-list-line-items__specification{
+.product__qty-container.cart-table__form{
+    display: flex;
+    .product__qty-input_more-info{
+        position: relative;
+        display: flex;
+        width: calc(60% - 5px);
+    }
+    .product__select {
+        width: calc(40% - 5px);
+        margin-left: 5%;
+    }
+}
+}
+.product-view-quantity__unit{
+    width: calc(40% - 5px);
+}
+.product-view-quantity__value .input {
+    float: left !important;
+    margin-top: -40px !important;
+    /* position: relative; */
+}
+@include breakpoint('tablet') {
+    .product-view-quantity__value{
+    .input-group-btn{
+       &.qty-minus{
+        position: relative;
+        //margin-top: 40px;
+        float: left;
+       }
+       &.qty-plus{
+        position: relative;
+        margin-top: -40px;
+        float: right;
+       }
+    }
+    width: 50% !important;
+}
+.product-view-quantity__unit{
+    width: calc(50% - 5px) !important;
+}
+.product-view-quantity__value .input {
+    float: left !important;
+    margin-top: -40px !important;
+    /* position: relative; */
+}
+}

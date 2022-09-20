@@ -1,0 +1,23 @@
+parameters:
+    # Config provider
+    ibnab_plus_minus.provider.configuration.class:         Ibnab\Bundle\PlusMinusBundle\Provider\ConfigurationProvider  
+
+services: 
+    ibnab_plus_minus.provider.configuration:
+        class: '%ibnab_plus_minus.provider.configuration.class%'
+        arguments:
+            - '@oro_config.global'
+            
+    ibnab_plus_minus.layout.data.provider:
+        class: 'Ibnab\Bundle\PlusMinusBundle\Layout\DataProvider\LayoutType'
+        arguments:
+            - '@oro_config.global'
+        tags:
+            - { name: layout.data_provider, alias: enable_plus_minus }
+            
+    ibnab_plus_minus.layout_context_configurator.enable_plus_minus:
+        class: 'Ibnab\Bundle\PlusMinusBundle\Layout\Extension\IbnabTypeLayoutToContext'
+        arguments:
+            - '@oro_config.global'
+        tags:
+            - { name: layout.context_configurator }

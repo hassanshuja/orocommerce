@@ -1,0 +1,61 @@
+{% block _shopping_list_line_items_list_quantity_form_widget %}
+    
+    {% set isProductUnitSelectionVisible = parent.productsUnitSelectionVisibilities[lineItem.product.id]|default({}) is not empty ? parent.productsUnitSelectionVisibilities[lineItem.product.id] : null %}
+    {% set isLineItemUnitVisible = parent.lineItemsUnitVisibilities[lineItem.id]|default({}) is not empty ? parent.lineItemsUnitVisibilities[lineItem.id] : null %}
+    {% set hasProductUnits = parent.productsUnits[lineItem.product.id] is defined %}
+    <form action="#" class="product__qty-container cart-table__form">
+        <div class="product__qty-input product__qty-input_inline product__qty-input_more-info qty-plus-minus">
+            <span class="input-group-btn qty-minus">
+                <button type="button" class="btn btn-default btn-number"  data-type="minus" data-field="quant[1]">
+                  -
+                </button>
+            </span> 
+            <div class="product__qty-input__count-option">
+                <input type="number" value="{{ lineItem.quantity }}" name="product_qty" data-name="field__quantity"
+                       placeholder="{{ 'oro.frontend.shoppinglist.view.qty.label'|trans }}"
+                       class="input  input--full text-center" disabled="disabled" required
+                       aria-label="{{ 'oro.product.quantity.aria-label'|trans }}"
+                />
+            </div>
+            <span class="input-group-btn qty-plus">
+                <button type="button" class="btn btn-default btn-number" data-type="plus" data-field="quant[1]">
+                  +
+                </button>
+            </span>            
+        </div>
+        <div class="product__select">
+            {% if isProductUnitSelectionVisible and hasProductUnits and parent.productsUnits[lineItem.product.id]|length > 1 %}
+                <select class="select select--full" name="product_unit" data-name="field__unit" required>
+                    {% for unit in parent.productsUnits[lineItem.product.id]|keys %}
+                        <option value="{{ unit }}" {% if unit == lineItem.unit.code %}selected="selected"{% endif %}>{{ unit|oro_format_product_unit_label}}</option>
+                    {% endfor %}
+                    {% if lineItem.unit.code not in parent.productsUnits[lineItem.product.id]|keys %}
+                        <option value="{{ lineItem.unit.code }}" selected="selected" disabled="disabled">{{ lineItem.unit.code|oro_format_product_unit_label}}</option>
+                    {% endif %}
+                </select>
+            {% else %}
+                <input type="hidden" name="product_unit" value="{{ lineItem.unit.code }}" data-name="field__unit" />
+                {% if isLineItemUnitVisible %}
+                    <div class="product__static-unit">{{ lineItem.unit.code|oro_format_product_unit_label}}</div>
+                {% endif %}
+            {% endif %}
+        </div>
+    </form>
+{% endblock %}
+
+{% block _minux_plus_qty_form_cart_widget %}
+    {% set attr = layout_attr_defaults(attr, {
+        'data-page-component-module': 'ibnabplusminus/js/plus-minus',
+    }) %}
+    <div {{ block('block_attributes') }}>
+        {{ block_widget(block) }}
+    </div>
+{% endblock %}
+{% block _product_view_minux_plus_qty_cart_list_widget %}
+    {% set attr = layout_attr_defaults(attr, {
+        'data-page-component-module': 'ibnabplusminus/js/plus-minus',
+    }) %}
+    <div {{ block('block_attributes') }}>
+        {{ block_widget(block) }}
+    </div>
+{% endblock %}

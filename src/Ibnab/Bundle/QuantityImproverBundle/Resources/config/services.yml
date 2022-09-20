@@ -1,0 +1,84 @@
+services:
+    ibnab_quantity_improver.event_listener.website_search_index:
+        class: 'Ibnab\Bundle\QuantityImproverBundle\EventListener\WebsiteSearchProductIndexerListener'
+        arguments:
+            - '@oro_website_search.manager.website_context_manager'
+            - '@ibnab_quantity_improver.provider.configuration'
+        tags:
+            - { name: kernel.event_listener, event: oro_website_search.event.index_entity.product, method: onWebsiteSearchIndex, priority: 100 }
+            - { name: kernel.event_listener, event: oro_datagrid.datagrid.build.pre.frontend-product-search-grid, method: onPreBuild }
+
+    ibnab_quantity_improver.provider.configuration:
+        class: Ibnab\Bundle\QuantityImproverBundle\Provider\ConfigurationProvider
+        public: true
+        arguments:
+            - '@oro_config.manager'
+            - '@oro_entity.fallback.resolver.entity_fallback_resolver'
+            
+    ibnab_quantity_improver.layout.data_provider:
+        class: 'Ibnab\Bundle\QuantityImproverBundle\Layout\DataProvider\QuantityData'
+        arguments:
+            - '@ibnab_quantity_improver.provider.configuration'         
+        tags:
+            - { name: layout.data_provider, alias: ibnab_quantity_improver_data }
+    ibnab_quantity_improver.twig.extension:
+        class: 'Ibnab\Bundle\QuantityImproverBundle\Twig\QuantityExtension'
+        public: false
+        arguments:
+            - '@oro_platform.twig.service_locator'
+        tags:
+            - { name: twig.extension }
+ 
+    ibnab_quantity_improver.layout_context_configurator.enable_quantity_improver:
+        class: 'Ibnab\Bundle\QuantityImproverBundle\Layout\Extension\IbnabTypeLayoutToContext'
+        arguments:
+            - '@oro_config.global'
+        tags:
+            - { name: layout.context_configurator }
+            
+    ibnab_quantity_improver.datagrid.event_listener.frontend_shoppinglist_grid:
+        class: 'Ibnab\Bundle\QuantityImproverBundle\EventListener\FrontendShoppingLlistDatagridListener'
+        arguments:
+            - '@ibnab_quantity_improver.provider.configuration'
+        tags:
+            - { name: kernel.event_listener, event: oro_datagrid.datagrid.build.pre.frontend-customer-user-shopping-list-edit-grid, method: onBuildBefore }
+    ibnab_quantity_improver.event_listener.datagrid_line_items_data.basic:
+        class: 'Ibnab\Bundle\QuantityImproverBundle\EventListener\DatagridLineItemsDataListener'
+        arguments:
+            - '@ibnab_quantity_improver.provider.configuration'
+        tags:
+            - { name: kernel.event_listener, event: oro_product.datagrid_line_items_data.frontend-customer-user-shopping-list-edit-grid, method: onLineItemData }
+            - { name: kernel.event_listener, event: oro_product.datagrid_line_items_data.frontend-customer-user-shopping-list-grid, method: onLineItemData }
+    ibnab_quantity_improver.event_listener.line_item_validation_listener:
+        class: Ibnab\Bundle\QuantityImproverBundle\EventListener\LineItemValidationListener
+        arguments:
+            - '@ibnab_quantity_improver.validator.quantity_to_order_validator'
+            - '@ibnab_quantity_improver.provider.configuration'
+        tags:
+            - { name: kernel.event_listener, event: line_item.validate, method: onLineItemValidate }
+    ibnab_quantity_improver.validator.quantity_to_order_validator:
+        class: Ibnab\Bundle\QuantityImproverBundle\Validator\QuantityToOrderValidatorService
+        arguments:
+            - '@oro_entity.fallback.resolver.entity_fallback_resolver'
+            - '@translator'
+            - '@oro_entity.manager.preloading_manager'
+        calls:
+            - [setLogger, ['@logger']]
+            
+    ibnab_quantity_improver.event_listener.product_quantity_to_order_form_view_listener:
+        class: 'Ibnab\Bundle\QuantityImproverBundle\EventListener\ProductQuantityToOrderFormViewListener'
+        parent: oro_inventory.service.fallback_fields_form_view
+        tags:
+            - { name: kernel.event_listener, event: oro_ui.scroll_data.before.product-view, method: onProductView }
+            - { name: kernel.event_listener, event: oro_ui.scroll_data.before.product-edit, method: onProductEdit }
+            - { name: kernel.event_listener, event: oro_ui.scroll_data.before.product-create-step-two, method: onProductEdit }
+    ibnab_quantity_improver.event_listener.category_quantity_to_order_form_view_listener:
+        class: 'Ibnab\Bundle\QuantityImproverBundle\EventListener\CategoryQuantityToOrderFormViewListener'
+        parent: oro_inventory.service.fallback_fields_form_view
+        tags:
+            - { name: kernel.event_listener, event: oro_ui.scroll_data.before.category-edit, method: onCategoryEdit }
+    ibnab_quantity_improver.event_listener.product_list:
+        class: Ibnab\Bundle\QuantityImproverBundle\EventListener\ProductListEventListener
+        tags:
+            - { name: kernel.event_listener, event: oro_product.product_list.build_query, method: onBuildQuery, priority: 10 }
+            - { name: kernel.event_listener, event: oro_product.product_list.build_result, method: onBuildResult, priority: 10 }

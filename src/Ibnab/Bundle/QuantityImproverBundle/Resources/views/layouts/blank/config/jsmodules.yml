@@ -1,0 +1,8 @@
+dynamic-imports:
+    oroproduct:
+        - ibnabquantityimprover/js/app/components/product-unit-select-component
+        - ibnabquantityimprover/js/quantity-util
+    oroshoppinglist:
+        - ibnabquantityimprover/js/app/views/editor/shoppinglist-line-item-editor-view
+        - ibnabquantityimprover/js/datagrid/plugin/shopping-list-inline-editing-plugin
+        - tpl-loader!ibnabquantityimprover/templates/datagrid/cell/shoppinglist-line-item.html

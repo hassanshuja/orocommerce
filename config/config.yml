@@ -1,0 +1,131 @@
+imports:
+    - { resource: parameters.yml }
+    - { resource: security.yml }
+
+framework:
+    #esi:             ~
+    translator:
+        paths:
+            - '%kernel.project_dir%/translations'
+        fallback: en
+    secret:          "%secret%"
+    router:
+        resource: "%kernel.project_dir%/config/routing.yml"
+        strict_requirements: "%kernel.debug%"
+    form:
+        legacy_error_messages: false
+    csrf_protection: true
+    validation:      { enable_annotations: true }
+    assets:
+        version_strategy: 'Oro\Bundle\AssetBundle\VersionStrategy\BuildVersionStrategy'
+    default_locale: en
+    session:
+        # More info about session cookie configuration can be found at
+        # https://doc.oroinc.com/backend/setup/post-install/cookies-configuration/#back-office-session-cookie
+        name:                 BAPID
+        handler_id:           '%session_handler%'
+        save_path:            '%kernel.project_dir%/var/sessions/%kernel.environment%'
+        gc_maxlifetime:       3600
+        cookie_httponly:      true
+        cookie_secure:        'auto'
+    fragments:
+        enabled:              true
+        path:                 /_fragment # used for controller action in template
+    serializer:
+        enabled:              true
+    mailer:
+        transports:
+            main: 'oro://system-config?fallback=%mailer_dsn%'
+            oro_user_email_origin: 'oro://user-email-origin'
+
+# Twig Configuration
+twig:
+    debug:                    "%kernel.debug%"
+    strict_variables:         "%kernel.debug%"
+    globals:
+        bap:
+            layout:           base.html.twig  # default layout across all Oro bundles
+
+fos_js_routing:
+    routes_to_expose: ['oro_.*']
+
+oro_frontend:
+    routes_to_expose: ['oro_.*']
+
+stof_doctrine_extensions:
+    default_locale: en
+    translation_fallback: true
+    orm:
+        default:
+            translatable:     true
+            tree:             true
+
+oro_translation:
+    locales: [en, fr]
+    templating: "@OroUI/Form/translatable.html.twig"
+
+oro_maintenance:
+    authorized:
+        path:                 'maintenance|.*\.js'             # "maintenance" is only for demo purposes, remove in production!
+#        ips:                  ["127.0.0.1"]                   # Optional. Authorized ip addresses
+    driver:
+        options:
+            file_path:        '%kernel.project_dir%/var/cache/maintenance_lock'
+
+#
+# ORO Bundles config
+#
+oro_theme:
+    active_theme: oro
+
+oro_message_queue:
+    transport:
+        '%message_queue_transport%': '%message_queue_transport_config%'
+
+#oro_message_queue:
+#  transport:
+#    default: 'dbal'
+#    dbal:
+#      connection: default                  # doctrine dbal connection name
+#      table: oro_message_queue             # table name where messages will be stored
+#      pid_file_dir: /tmp/oro-message-queue-prod # RedeliverOrphanMessagesExtension stores consumer pid files here
+#      consumer_process_pattern: ':consume' # used by RedeliverOrphanMessagesExtension to check the working or non-working consumers
+#                                           # (see limitations section for more details)
+#      polling_interval: 1000               # consumer polling interval in milliseconds
+                                           # (see limitations section for more details)
+### RabbitQ	
+#oro_message_queue:
+#     transport:
+#         default: '%message_queue_transport%'
+#         '%message_queue_transport%': '%message_queue_transport_config%'
+#     client: ~
+                                          
+## Gaufrette Settings
+
+
+oro_layout:
+    enabled_themes:
+        - blank
+        - default
+        - custom
+        - view-switcher
+
+oro_locale:
+    formatting_code: en
+    language: en
+
+oro_attachment:
+    upload_file_mime_types:
+        - application/msword
+        - application/vnd.ms-excel
+        - application/pdf
+        - application/zip
+        - image/gif
+        - image/jpeg
+        - image/png
+        - image/webp
+    upload_image_mime_types:
+        - image/gif
+        - image/jpeg
+        - image/png
+        - image/webp

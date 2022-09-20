@@ -1,0 +1,16 @@
+layout:
+    actions:
+        - '@setBlockTheme':
+            themes: '@IbnabQuantityImprover/layouts/blank/imports/oro_product_line_item_form/oro_product_line_item_form.html.twig'
+
+        - '@setOption':
+            id: 'product_datagrid_row_product_line_item_form_fields'
+            optionName: 'vars'
+            optionValue:
+                form: '=data["oro_product_form"].getLineItemFormView(data.offsetExists("product")?data["product"], instance_name)'
+                singleUnitMode: '=data["oro_product_single_unit_mode"].isSingleUnitMode()'
+                singleUnitModeCodeVisible: '=data["oro_product_single_unit_mode"].isSingleUnitModeCodeVisible()'
+                defaultUnitCode: '=data["oro_product_single_unit_mode"].getDefaultUnitCode()'
+                minimumQuantityToOrderConfig: '=data["ibnab_quantity_improver_data"].getMinimumQuantityToOrder()'
+                maximumQuantityToOrderConfig: '=data["ibnab_quantity_improver_data"].getMaximumQuantityToOrder()'
+    conditions: 'context["enable_quantity_improver"]'

@@ -1,0 +1,13 @@
+layout:
+    actions:
+        - '@setBlockTheme':
+            themes: '@IbnabPlusMinus/layouts/blank/page/footer.html.twig'
+        - '@add':
+            id: minux_plus_qty_form
+            parentId: page_content
+            blockType: block
+        #- '@add':
+          #  id: product_view_minux_plus_qty_from
+          #  parentId: product_view_container
+          #  blockType: block
+    conditions: 'context["enable_plus_minus"]'

@@ -1,0 +1,15 @@
+Oro\Bundle\ProductBundle\Entity\Product:
+    alias: oro_product_WEBSITE_ID
+    fields:
+        -
+            name: minimum_quantity_to_order
+            type: decimal
+        -
+            name: maximum_quantity_to_order
+            type: decimal          
+        -
+            name: quantity_multiplication
+            type: decimal    
+            
+            
+            

@@ -1,0 +1,10 @@
+{% import 'OroUIBundle::macros.html.twig' as UI %}
+
+{% set quantityImproverIncrement = oro_entity_fallback_value(entity, 'quantityImproverIncrement') %}
+{% set enableQuantityImproverIncrement = oro_entity_fallback_value(entity, 'enableQuantityImproverIncrement') %}
+{% if enableQuantityImproverIncrement is not null %}
+    {% set enableQuantityImproverIncrement = (enableQuantityImproverIncrement == true) ? 'true' : 'false' %}
+{% endif %}
+{% set enableQuantityImproverIncrementValue = enableQuantityImproverIncrement is not null ? 'oro.inventory.manage_inventory.choice.' ~ enableQuantityImproverIncrement : null %}
+{{ UI.renderProperty('ibnab.quantity_improver.fields.product.enable_increment_quantity_to_order.label'|trans, enableQuantityImproverIncrementValue|trans) }}
+{{ UI.renderProperty('ibnab.quantity_improver.fields.product.increment_quantity_to_order.label'|trans, quantityImproverIncrement) }}

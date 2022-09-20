@@ -1,0 +1,28 @@
+<% let oroshoppinglist = _.macros('oroshoppinglist') %>
+<% if (!obj.isConfigurable) { %>
+    <div class="line-item-container">
+        <% var _formattedUnit = oroshoppinglist.renderUnit({unit: unitCode, quantity: 1}) %>
+        <!--<input
+            name="quantity"
+            type="number"
+            inputmode="text"
+            data-focused=".select2-container-qty"
+            value="<%- quantity %>"
+            data-precision="<%- precision %>"
+            class="input input-qty"
+            aria-label="<%- _.__('oro.frontend.shoppinglist.inline_editing.quantity.aria_label') %>"
+            autocomplete="off"
+        > -->
+        <div class="select" tabindex="0" data-focused=".select2-container-qty" title="<%- _.__('oro.frontend.shoppinglist.inline_editing.quantity.aria_label') %>"><%- quantity %></div>
+        <div class="select" tabindex="0" data-focused=".select2-container" title="<%- _formattedUnit.trim() %>"><%- _formattedUnit.trim() %></div>
+    </div>
+<% } else { %>
+    <div class="mobile-row label-in-mobile-start label-bold-in-mobile line-item-configurable" data-label="<%- _metadata.label %>:">
+        <% if (quantity) { %>
+            <% var formattedQuantity = oroshoppinglist.quantityHelper.formatQuantity(quantity, precision) %>
+            <%- _.__('oro.product.product_unit.' + unit + '.value.full', {count: formattedQuantity}, quantity) %>
+        <% } else { %>
+            <%- _.__('oro.shoppinglist.lineitem.empty_configurable_product') %>
+        <% } %>
+    </div>
+<% } %>

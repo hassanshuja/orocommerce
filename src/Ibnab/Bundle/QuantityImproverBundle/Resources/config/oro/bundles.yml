@@ -1,0 +1,2 @@
+bundles:
+    - { name: Ibnab\Bundle\QuantityImproverBundle\IbnabQuantityImproverBundle , priority: 8555 }

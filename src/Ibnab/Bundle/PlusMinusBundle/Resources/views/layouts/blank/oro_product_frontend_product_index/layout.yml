@@ -1,0 +1,9 @@
+layout:
+    actions:
+        - '@setBlockTheme':
+            themes: '@IbnabPlusMinus/layouts/blank/oro_product_frontend_product_index/layout.html.twig'
+        - '@add':
+            id: minux_plus_qty_form_list
+            parentId: product_datagrid_row
+            blockType: block
+    conditions: 'context["enable_plus_minus"]'

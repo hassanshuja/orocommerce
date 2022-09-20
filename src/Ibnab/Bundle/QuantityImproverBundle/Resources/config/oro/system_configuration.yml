@@ -1,0 +1,79 @@
+system_configuration:
+    groups:
+        ibnab_quantity_improver_config:
+            title: ibnab.quantity_improver.system_configuration.groups.title
+        ibnab_quantity_improver_setting:
+            title: ibnab.quantity_improver.system_configuration.groups.setting.title
+            icon:  'fa-barcode'
+        ibnab_quantity_improver_view:
+            title: ibnab.quantity_improver.system_configuration.groups.view.title
+    fields:
+        ibnab_quantity_improver.enable:
+            data_type: integer
+            type: 'Symfony\Component\Form\Extension\Core\Type\ChoiceType'
+            priority: 10
+            options:
+                label: ibnab.quantity_improver.system_configuration.fields.enable.label
+                required: false
+                choices:
+                    ibnab.quantity_improver.system_configuration.fields.no.label: 0 
+                    ibnab.quantity_improver.system_configuration.fields.yes.label: 1
+        ibnab_quantity_improver.enable_select:
+            data_type: integer
+            type: 'Symfony\Component\Form\Extension\Core\Type\ChoiceType'
+            priority: 7
+            options:
+                label: ibnab.quantity_improver.system_configuration.fields.enable_select.label
+                required: false
+                choices:
+                    ibnab.quantity_improver.system_configuration.fields.no.label: 0 
+                    ibnab.quantity_improver.system_configuration.fields.yes.label: 1
+        ibnab_quantity_improver.increment_quantity_to_order:
+            data_type: decimal
+            type: Symfony\Component\Form\Extension\Core\Type\NumberType
+            search_type: text
+            priority: 5
+            options:
+                label: ibnab.quantity_improver.system_configuration.fields.increment_quantity_to_order.label
+                required: false
+                scale: 2
+                constraints:
+                    - Oro\Bundle\ValidationBundle\Validator\Constraints\NumericRange:
+                        min: -100000000
+                        max: 100000000
+
+        ibnab_quantity_improver.increment:
+            data_type: float
+            type: 'Symfony\Component\Form\Extension\Core\Type\TextType'
+            priority: 6
+            options:
+                label: ibnab.quantity_improver.system_configuration.fields.increment.label
+                required: false
+        ibnab_quantity_improver.enable_message_increment:
+            data_type: integer
+            type: 'Symfony\Component\Form\Extension\Core\Type\ChoiceType'
+            priority: 4
+            options:
+                label: ibnab.quantity_improver.system_configuration.fields.enable_message_increment.label
+                required: false
+                choices:
+                    ibnab.quantity_improver.system_configuration.fields.no.label: 0 
+                    ibnab.quantity_improver.system_configuration.fields.yes.label: 1
+
+    tree:
+        system_configuration:
+            platform:
+                children:
+                    ibnab_config:
+                        children:
+                            ibnab_plus_minus_setting:
+                                priority: 502
+                                children:
+                                    ibnab_quantity_improver_view:
+                                        priority: 720
+                                        children:
+                                            - ibnab_quantity_improver.enable
+                                            #- ibnab_quantity_improver.increment
+                                            - ibnab_quantity_improver.increment_quantity_to_order
+                                            - ibnab_quantity_improver.enable_select
+                                            - ibnab_quantity_improver.enable_message_increment
